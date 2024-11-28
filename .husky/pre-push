@@ -1,0 +1,13 @@
+echo '🚨 Validando o nome do branch antes de enviar o código'
+
+local_branch="$(git rev-parse --abbrev-ref HEAD)"
+
+valid_branch_regex="^(feature|bugfix|improvement|library|prerelease|release|hotfix)\/[a-z0-9._-]+$"
+
+if [[ ! $local_branch =~ $valid_branch_regex ]]
+then
+    echo "❌🤘🔥 Opa! O nome do seu branch parece estar fora do padrão. Neste projeto, seguimos uma convenção específica: feature | bugfix | improvement | library | prerelease | release | hotfix. Seu branch não está seguindo essa convenção. Por favor, renomeie o branch e tente novamente! 🔥🤘❌"
+    exit 1
+fi
+
+exit 0

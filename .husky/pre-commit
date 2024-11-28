@@ -1,0 +1,34 @@
+echo '🏗️👷 Estilizando, testando e construindo seu projeto antes de fazer o commit'
+
+pnpm run format
+
+pnpm run check-format ||
+(
+    echo '🤢🤮🤢🤮 Está HORRÍVEL - Seu estilo está uma bagunça. 🤢🤮🤢🤮
+            Verificação do Prettier falhou. Execute pnpm run format, adicione as mudanças e tente fazer o commit novamente.' ;
+    false ;
+)
+
+pnpm run check-lint ||
+(
+    echo '😤🏀👋😤 Tire esse código fraco daqui! 😤🏀👋😤 
+            Verificação do ESLint falhou. Faça as alterações necessárias indicadas acima, adicione as mudanças e tente fazer o commit novamente.' ;
+    false ;
+)
+
+pnpm run test ||
+(
+    echo '❌🔍🛠️ Vamos melhorar esse teste, valide o seu teste e tente novamente! ❌🔍🛠️ ' ;
+    false ;
+)
+
+echo '👷🔨👷🔨... Tentando criar a build de produção... 👷🔨👷🔨'
+
+pnpm run build ||
+(
+    echo '❌👷🔨❌ Melhor chamar o Chefe... A build falhou ❌👷🔨❌
+            A build do Vite falhou: Veja os erros acima para entender o motivo.' ;
+    false ;
+)
+
+echo '✅✅✅✅ Você venceu desta vez... Estou fazendo o commit agora. ✅✅✅✅'
